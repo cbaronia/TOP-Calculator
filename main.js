@@ -3,6 +3,8 @@ let firstNum = 9;
 let operator = '/';
 let secondNum = 2;
 
+let displayValue = "";
+
 function add(a, b){
     return a + b;
 }
@@ -42,3 +44,22 @@ function operate(a, b, op){
     }
     return opResult;
 }
+
+function updateDisplayValue(value){
+    let myDisplay = document.querySelector(".display");
+    myDisplay.textContent = value;
+}
+
+// Query Selectors
+let numberBtns = document.querySelectorAll(".numbers > button");
+
+// Event Listeners
+numberBtns.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+        
+        // Push button's value onto displayValue
+        displayValue += btn.value;
+        // Update the displayValue on screen
+        updateDisplayValue(displayValue);
+    });
+})
