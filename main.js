@@ -45,9 +45,23 @@ function operate(a, b, op){
     return opResult;
 }
 
-function updateDisplayValue(value){
+function updateDisplayValue_Number(btnValue){
     let myDisplay = document.querySelector(".display");
-    myDisplay.textContent = value;
+
+    // First button was zero
+    if(displayValue === "0" && btnValue === "0"){
+        return;
+    }
+    else if(displayValue === "0" && btnValue !== "0"){
+        displayValue = btnValue;
+        myDisplay.textContent = displayValue;
+        return;
+    }
+
+    // Push button's value onto displayValue
+    displayValue += btnValue;
+
+    myDisplay.textContent = displayValue;
 }
 
 // Query Selectors
@@ -57,9 +71,8 @@ let numberBtns = document.querySelectorAll(".numbers > button");
 numberBtns.forEach((btn) => {
     btn.addEventListener("click", (e) => {
         
-        // Push button's value onto displayValue
-        displayValue += btn.value;
         // Update the displayValue on screen
-        updateDisplayValue(displayValue);
+        updateDisplayValue_Number(btn.value);
+
     });
 })
