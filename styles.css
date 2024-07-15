@@ -4,3 +4,10 @@
     box-sizing: inherit;
 }
 
+button {
+    font-size: 36px;
+}
+
+.display {
+    font-size: 36px;
+}
