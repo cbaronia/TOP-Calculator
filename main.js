@@ -1,3 +1,8 @@
+// GLOBAL VARIABLES
+let firstNum = 0;
+let operator = "";
+let secondNum = 0;
+
 function add(a, b){
     return a + b;
 }
