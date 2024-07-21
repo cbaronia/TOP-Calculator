@@ -1,9 +1,11 @@
 // GLOBAL VARIABLES
-let firstNum = 0;
+let firstNum = null;
+let secondNum = null;
 let operator = '';
 
+let lastBtnPressed = null;
+
 let displayValue = "0";
-let firstNumSet = false;
 
 function add(a, b){
     return a + b;
@@ -64,6 +66,10 @@ function updateDisplayValue_Number(btnValue){
         return;
     }
 
+    if(lastBtnPressed == "op" || lastBtnPressed == "equal"){
+        displayValue = "";
+    }
+
     // Push button's value onto displayValue
     displayValue += btnValue;
 
@@ -77,32 +83,43 @@ numberBtns.forEach((btn) => {
         // Update the displayValue on screen
         updateDisplayValue_Number(btn.value);
 
+        lastBtnPressed = "num";
+
     });
 });
 
 calcBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
-        if(!firstNumSet){
+        if(firstNum === null){
             firstNum = +displayValue;
-            firstNumSet = true;
-            displayValue = "";
+        }
+        else if(firstNum !== null && lastBtnPressed === "num"){
+            let calcResult = operate(firstNum, +displayValue, operator);
+            displayValue = calcResult.toString();
+            myDisplay.textContent = displayValue;
+            firstNum = calcResult;
         }
         operator = btn.value;
+        lastBtnPressed = "op";
     });
 });
 
 equalBtn.addEventListener("click", () => {
-    let calcResult = operate(firstNum, +displayValue, operator);
-    displayValue = calcResult.toString();
-    myDisplay.textContent = displayValue;
-    firstNum = calcResult;
-    displayValue = "";
+    if(firstNum !== null && operator !== '' && lastBtnPressed === "num"){
+        let calcResult = operate(firstNum, +displayValue, operator);
+        displayValue = calcResult.toString();
+        myDisplay.textContent = displayValue;
+        firstNum = calcResult;
+        operator = '';
+    }
+    lastBtnPressed = "equal";
 });
 
 clearBtn.addEventListener("click", () => {
-    firstNum = 0;
+    firstNum = null;
+    secondNum = null;
     operator = '';
     displayValue = "0";
-    firstNumSet = false;
     myDisplay.textContent = displayValue;
+    lastBtnPressed = "clear";
 });
