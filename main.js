@@ -49,8 +49,8 @@ function operate(a, b, op){
 
 // Query Selectors
 let myDisplay = document.querySelector(".display");
-let numberBtns = document.querySelectorAll(".numbers > button");
-let calcBtns = document.querySelectorAll(".calcButtons > button");
+let numberBtns = document.querySelectorAll(".number");
+let calcBtns = document.querySelectorAll(".operation");
 let equalBtn = document.querySelector(".equalBtn");
 let clearBtn = document.querySelector(".clearBtn");
 
