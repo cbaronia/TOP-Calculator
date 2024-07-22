@@ -22,7 +22,14 @@ function multiply(a, b){
 function divide(a, b){
 
     if(b === 0){
-        return "ERROR: DIV BY ZERO";
+        alert("Dont Divide by Zero");
+        firstNum = null;
+        secondNum = null;
+        operator = '';
+        displayValue = "0";
+        myDisplay.textContent = displayValue;
+        lastBtnPressed = "clear";
+        return;
     }
 
     return a / b;
@@ -95,7 +102,13 @@ calcBtns.forEach((btn) => {
         }
         else if(firstNum !== null && lastBtnPressed === "num"){
             let calcResult = operate(firstNum, +displayValue, operator);
-            displayValue = calcResult.toString();
+            // If int
+            if(calcResult % 1 !== 0){
+                displayValue = parseFloat(calcResult.toString()).toFixed(8);
+            }
+            else{
+                displayValue = calcResult.toString();
+            }
             myDisplay.textContent = displayValue;
             firstNum = calcResult;
         }
@@ -107,7 +120,13 @@ calcBtns.forEach((btn) => {
 equalBtn.addEventListener("click", () => {
     if(firstNum !== null && operator !== '' && lastBtnPressed === "num"){
         let calcResult = operate(firstNum, +displayValue, operator);
-        displayValue = calcResult.toString();
+        // If int
+        if(calcResult % 1 !== 0){
+            displayValue = parseFloat(calcResult.toString()).toFixed(8);
+        }
+        else{
+            displayValue = calcResult.toString();
+        }
         myDisplay.textContent = displayValue;
         firstNum = calcResult;
         operator = '';
